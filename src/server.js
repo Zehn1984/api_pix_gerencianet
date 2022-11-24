@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
+require('dotenv').config()
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -27,11 +25,14 @@ app.get('/', async (req, res) => {
     valor: {
       original: '0.10'
     },
-    chave: '126bec4a-2eb6-4b79-a045-78db68412899',
+    chave: 'andersoncampolina@gmail.com',
+    //chave: '126bec4a-2eb6-4b79-a045-78db68412899',
     solicitacaoPagador: 'Cobrança dos serviços prestados.'
   };
 
+  // Info para criacao de cobranca que sera passado para a base pronta do axios
   const cobResponse = await reqGN.post('/v2/cob', dataCob);
+  // Info para capturar o QRcode, passando o id passado pela cobranca acima
   const qrcodeResponse = await reqGN.get(`/v2/loc/${cobResponse.data.loc.id}/qrcode`);
 
   res.render('qrcode', { qrcodeImage: qrcodeResponse.data.imagemQrcode })
@@ -40,7 +41,7 @@ app.get('/', async (req, res) => {
 app.get('/cobrancas', async(req, res) => {
   const reqGN = await reqGNAlready;
 
-  const cobResponse = await reqGN.get('/v2/cob?inicio=2021-02-15T16:01:35Z&fim=2021-02-22T23:59:00Z');
+  const cobResponse = await reqGN.get('/v2/cob?inicio=2022-11-22T16:01:35Z&fim=2022-11-24T23:59:00Z');
 
   res.send(cobResponse.data);
 });

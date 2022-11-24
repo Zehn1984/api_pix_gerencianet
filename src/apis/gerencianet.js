@@ -3,16 +3,20 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
+// Faz a leitura do certificado na pasta cert
 const cert = fs.readFileSync(
   path.resolve(__dirname, `../../certs/${process.env.GN_CERT}`)
 );
 
+// Armazena o contrato no agent que sera passado na requisicao do axios
 const agent = new https.Agent({
   pfx: cert,
   passphrase: ''
 });
 
+// Requisicao de autenticacao
 const authenticate = ({ clientID, clientSecret }) => {
+  // buffer.from transforma os dados no tipo informado, nesse caso, base64
   const credentials = Buffer.from(
     `${clientID}:${clientSecret}`
   ).toString('base64');
@@ -31,7 +35,7 @@ const authenticate = ({ clientID, clientSecret }) => {
   });
 };
 
-
+//Requisicao de cobranca
 const GNRequest = async (credentials) => {
   const authResponse = await authenticate(credentials);
   const accessToken = authResponse.data?.access_token;
