@@ -1,20 +1,25 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# API Pix - Gerencianet
+Aplicação que gera cobrança e QRCode e aceita pagamentos via Pix. Projeto desenvolvido no [vídeo do YouTube do canal Programador a Bordo](https://youtu.be/bo1THXaohU0)!
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+## Dependências
+- Node v15.5.0
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Como rodar
+- npm install
+- npm run start:dev
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Configurações
+### Diretório de certificados
+Criar diretório `certs` na raíz do projeto e adicionar certificados p12 e chave pública gerados pela Gerencianet
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### Variáveis de ambiente
+Criar as devidas variáveis de ambiente. Se estiver rodando localmente, remoear o arquivo `.env-sample` para `.env` e adicionar seus respectivos valores
+
+| Chave | Valor |
+|--|--|
+| GN_CLIENT_ID | Client ID gerado no dashboard da sua app na Gerencianet |
+| GN_CLIENT_SECRET | Client Secret gerado no dashboard da sua app na Gerencianet |
+| GN_ENDPOINT | protocolo + url base. Ex: https://api-pix-h.gerencianet.com.br |
+| NODE_ENV | Colocar development ou production dependendo do ambiente |
+| GN_CERT | Nome do certificado p12 que está na pasta `certs` criado por você |
+
